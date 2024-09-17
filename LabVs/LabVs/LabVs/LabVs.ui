@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LabVsClass</class>
+ <widget class="QMainWindow" name="LabVsClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>941</width>
+    <height>732</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LabVs</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="ImageCropWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>500</width>
+      <height>500</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSelectImages1">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>30</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load 1</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonNextImage1">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>80</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>130</y>
+      <width>113</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>180</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonTransform">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>230</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Transform</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonCrop">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>180</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Crop</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="sectorSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>280</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>280</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sectors:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSegm">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>340</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Segmentation</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonShowData">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>410</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ShowAllData</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>501</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ImageCropWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">imagecropwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="LabVs.qrc"/>
+ </resources>
+ <connections/>
+</ui>
