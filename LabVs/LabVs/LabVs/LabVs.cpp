@@ -110,32 +110,30 @@ void LabVs::on_buttonSegmentation_clicked()
         return;
     }
 
-
     QImage& image = images[currentImageIndex];
     QSize imageSize = image.size();
 
+    // Центр зображення тепер у правому нижньому куті
     QPoint center(imageSize.width(), imageSize.height());
 
     QVector<int> blackPixelCounts(numberOfSectors, 0);
 
-    double angleStep = 360.0 / numberOfSectors;
+    // Крок кута для кожного сектору
+    double angleStep = 90.0 / numberOfSectors;
 
+    // Проходимо по всіх пікселях зображення
     for (int y = 0; y < image.height(); ++y) {
         for (int x = 0; x < image.width(); ++x) {
             QRgb pixel = image.pixel(x, y);
-            int gray = qGray(pixel);
+            int gray = qGray(pixel);  // Отримуємо градацію сірого
 
-
-            if (gray == 0) {
-
+            if (gray == 0) {  // Якщо піксель чорний
                 QPoint pixelPoint(x, y);
-                QPoint vector = pixelPoint - center;
-                double angle = std::atan2(vector.y(), vector.x()) * 180 / M_PI;
+                QPoint vector = pixelPoint - center;  // Вектор від пікселя до центра
 
+                // Обчислюємо кут у діапазоні від 0 до 90 градусів
+                double angle = std::atan2(std::abs(vector.y()), std::abs(vector.x())) * 180.0 / M_PI;
 
-                if (angle < 0) {
-                    angle += 360;
-                }
                 // Визначаємо сектор за кутом
                 int sectorIndex = static_cast<int>(angle / angleStep);
                 blackPixelCounts[sectorIndex]++;
@@ -146,20 +144,20 @@ void LabVs::on_buttonSegmentation_clicked()
     // Зберігаємо результат у QMap для поточного зображення
     imageSegmentationData[currentImageIndex] = blackPixelCounts;
 
-    // Виводимо результат у форматі "image X vector"
+    // Формуємо результат у вигляді рядка
     QString result = "image " + QString::number(currentImageIndex + 1) + " vector: [";
     for (int i = 0; i < numberOfSectors; ++i) {
         result += QString::number(blackPixelCounts[i]);
         if (i < numberOfSectors - 1) {
-            result += ", "; // Додаємо коми між елементами
+            result += ", ";  // Додаємо коми між елементами
         }
     }
     result += "]";
 
-   
+    // Виводимо результат
     qDebug() << result;
 
-
+    // Оновлюємо віджет
     imageCropWidget->setSectors(numberOfSectors);
     imageCropWidget->update();
 }

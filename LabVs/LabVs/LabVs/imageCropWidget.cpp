@@ -55,29 +55,38 @@ void ImageCropWidget::paintEvent(QPaintEvent* event)
 
         // Якщо є визначені сектори, малюємо їх
         if (numberOfSectors > 0) {
-            double angleStep = 360.0 / numberOfSectors;
-            QPoint center(targetRect.bottomRight()); // Центр у нижньому правому куті
+            // Крок кута для кожного сектору (від 0 до 90 градусів)
+            double angleStep = 90.0 / numberOfSectors;
+
+            // Центр у правому нижньому куті
+            QPoint center(targetRect.bottomRight());
+
+            // Корекція масштабування для довжини ліній
+            int lineLength = std::min(700, 700); // Довжина лінії до краю зображення
 
             for (int i = 0; i < numberOfSectors; ++i) {
                 double angle = i * angleStep;
 
+                // Обчислюємо кут в радіанах для поточного сектору
                 double radians = qDegreesToRadians(angle);
 
-                // Кінцева точка для лінії (лінія йде до краю зображення)
-                QPointF endPoint = center + QPointF(std::cos(radians) * targetRect.width(), std::sin(radians) * targetRect.height());
+                // Корекція напрямку малювання (враховуємо що центр внизу)
+                QPointF endPoint = center + QPointF(-std::cos(radians) * lineLength, -std::sin(radians) * lineLength);
 
+                // Малюємо секторну лінію червоного кольору
                 painter.setPen(QPen(Qt::red, 2));
                 painter.drawLine(center, endPoint.toPoint());
             }
         }
 
-        // Малюємо червону рамку вибору
+        // Малюємо червону рамку вибору, якщо вона є
         if (!selectionRect.isNull()) {
             painter.setPen(Qt::red);
             painter.drawRect(selectionRect);
         }
     }
 }
+
 
 void ImageCropWidget::mousePressEvent(QMouseEvent* event)
 {
