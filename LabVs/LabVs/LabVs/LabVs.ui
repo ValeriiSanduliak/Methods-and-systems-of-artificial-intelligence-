@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>941</width>
+    <width>1278</width>
     <height>732</height>
    </rect>
   </property>
@@ -60,7 +60,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>180</string>
+     <string>230</string>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonTransform">
@@ -73,7 +73,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Transform</string>
+     <string>Transform1</string>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonCrop">
@@ -93,7 +93,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>280</y>
+      <y>350</y>
       <width>121</width>
       <height>21</height>
      </rect>
@@ -103,7 +103,7 @@
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>280</y>
+      <y>350</y>
       <width>51</width>
       <height>21</height>
      </rect>
@@ -115,8 +115,8 @@
    <widget class="QPushButton" name="buttonSegm">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>340</y>
+      <x>710</x>
+      <y>390</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -129,7 +129,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>410</y>
+      <y>440</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -141,11 +141,148 @@
    <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>560</y>
-      <width>501</width>
+      <x>30</x>
+      <y>550</y>
+      <width>301</width>
       <height>151</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSelectImages2">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>30</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load 2</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSelectImages3">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>30</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load 3</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonTransform_2">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>230</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Transform2</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonTransform_3">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>230</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Transform3</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonTransform_All">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>300</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TransformAll</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>550</y>
+      <width>301</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>550</y>
+      <width>291</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSelectImages4">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>30</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load 4</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonTransform_4">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>230</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Transform4</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSegm_2">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>380</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Segmentation</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonCompare">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>440</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Compare</string>
     </property>
    </widget>
   </widget>

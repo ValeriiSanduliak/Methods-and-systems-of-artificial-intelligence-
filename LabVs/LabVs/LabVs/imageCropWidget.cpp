@@ -32,6 +32,7 @@ void ImageCropWidget::clearImage()
 {
     this->image = QImage();
     selectionRect = QRect();
+    numberOfSectors = 0;
     update();  // Перемалювати віджет
 }
 
