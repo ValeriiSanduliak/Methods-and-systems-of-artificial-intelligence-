@@ -2,6 +2,9 @@
 #include <QFileDialog>
 #include <QThread>
 #include <QtConcurrent/QtConcurrent>
+#include <QtMath> // для функції sqrt()
+#include <QVector>
+#include <QMap>
 
 LabVs::LabVs(QWidget *parent)
     : QMainWindow(parent), currentImageIndex(0)
@@ -42,6 +45,8 @@ LabVs::LabVs(QWidget *parent)
 
 
     connect(ui.buttonCompare, &QPushButton::clicked, this, &LabVs::on_buttonCompare_clicked);
+
+    connect(ui.buttonCompare_2, &QPushButton::clicked, this, &LabVs::on_buttonCompareD_clicked);
 
 }
 
@@ -215,6 +220,16 @@ void LabVs::on_buttonShowData_clicked()
     qDebug() << "Finding max and min values for class 3";
     FindMaxMinValue(Class3SanduliakS3, SanduliakS3MAX, SanduliakS3MIN);
   
+
+
+    SanduliakS1Center = calculateColumnMeans(Class1SanduliakS1);
+    SanduliakS2Center = calculateColumnMeans(Class2SanduliakS2);
+    SanduliakS3Center = calculateColumnMeans(Class3SanduliakS3);
+    // Виводимо результат
+    qDebug() << "Center for class 1: " << SanduliakS1Center;
+    qDebug() << "Center for class 2: " << SanduliakS2Center;
+    qDebug() << "Center for class 3: " << SanduliakS3Center;
+
 }
 
 void LabVs::on_buttonSelectImages2_clicked()
@@ -232,7 +247,9 @@ void LabVs::on_buttonSelectImages4_clicked()
    imageCropWidget->clearImage();
    imagesCompare.clear();
    LoadImage(imagesCompare);
-
+   d1 = 0;
+   d2 = 0;
+   d3 = 0;
 }
 
 void LabVs::on_buttonTransform4_clicked()
@@ -324,9 +341,29 @@ void LabVs::on_buttonCompare_clicked()
     }
 }
 
+void LabVs::on_buttonCompareD_clicked()
+{
+    d1 = calculateEuclideanDistance(CompareSanduliakS1[0], SanduliakS1Center);
+    d2 = calculateEuclideanDistance(CompareSanduliakS1[0], SanduliakS2Center);
+    d3 = calculateEuclideanDistance(CompareSanduliakS1[0], SanduliakS3Center);
 
+    qDebug() << "Distance to class 1: " << d1;
+    qDebug() << "Distance to class 2: " << d2;
+    qDebug() << "Distance to class 3: " << d3;
 
-
+    if (d1 < d2 && d1 < d3) {
+		qDebug() << "The image belongs to class 1";
+	}
+	else if (d2 < d1 && d2 < d3) {
+		qDebug() << "The image belongs to class 2";
+	}
+	else if (d3 < d1 && d3 < d2) {
+		qDebug() << "The image belongs to class 3";
+	}
+	else {
+		qDebug() << "The image does not belong to any class";
+	}
+}
 
 
 
@@ -513,7 +550,7 @@ void LabVs::normalizeData(QMap<int, QVector<int>>& imageSegmentationDataLocal, Q
         QVector<double> normalizedM1 = dataM[imageIndex];
 
         qDebug() << "image" << imageIndex + 1 << "S vector: " << normalizedS1;
-        qDebug() << "image" << imageIndex + 1 << "M vector: " << normalizedM1;
+       // qDebug() << "image" << imageIndex + 1 << "M vector: " << normalizedM1;
     }
 }
 
@@ -574,6 +611,55 @@ void LabVs::FindMaxMinValue(QMap<int, QVector<double>>& data, QVector<double>& m
     for (int i = 0; i < max.size(); ++i) {
         qDebug() << "MaxMin Value for column " << i + 1 << " is [ " << max[i] << " , " << min[i] << " ]";
     }
+}
+
+
+
+
+double LabVs::calculateEuclideanDistance(const QVector<double>& vec1, const QVector<double>& vec2)
+{
+    // Перевірка, чи вектори мають однакову довжину
+    if (vec1.size() != vec2.size()) {
+        qWarning("Вектори повинні бути однакової довжини!");
+        return -1.0; // Повертаємо помилкове значення
+    }
+
+    double sum = 0.0;
+
+    // Обчислюємо суму квадратів різниць компонент
+    for (int i = 0; i < vec1.size(); ++i) {
+        sum += qPow(vec1[i] - vec2[i], 2);
+    }
+
+    // Повертаємо квадратний корінь з цієї суми
+    return qSqrt(sum);
+}
+
+QVector<double> LabVs::calculateColumnMeans(const QMap<int, QVector<double>>& data)
+{
+    if (data.isEmpty()) {
+        return {};
+    }
+
+    int vectorSize = data.first().size(); // Передбачається, що всі вектори мають однаковий розмір
+    QVector<double> means(vectorSize, 0.0); // Вектор для зберігання середніх значень
+    int numVectors = data.size(); // Кількість векторів (зображень)
+
+    // Обчислення суми для кожної компоненти (стовпця)
+    for (auto it = data.begin(); it != data.end(); ++it) {
+        const QVector<double>& vec = it.value(); // Беремо кожен вектор
+
+        for (int i = 0; i < vectorSize; ++i) {
+            means[i] += vec[i]; // Сумуємо компоненти
+        }
+    }
+
+    // Ділимо суму кожної компоненти на кількість векторів, щоб отримати середнє
+    for (int i = 0; i < vectorSize; ++i) {
+        means[i] /= numVectors;
+    }
+
+    return means;
 }
 
 

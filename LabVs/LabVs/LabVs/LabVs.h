@@ -30,6 +30,7 @@ public:
     void on_buttonTransform4_clicked();
     void on_buttonSegmentation4_clicked();
     void on_buttonCompare_clicked();
+    void on_buttonCompareD_clicked();
 
 
     void on_buttonTransform_All_clicked();
@@ -55,6 +56,10 @@ protected:
 
     void FindMaxMinValue(QMap<int, QVector<double>>& data, QVector<double>& max, QVector<double>& min);
    
+
+    double calculateEuclideanDistance(const QVector<double>& vec1, const QVector<double>& vec2);
+    QVector<double> calculateColumnMeans(const QMap<int, QVector<double>>& data);
+
 private:
     Ui::LabVsClass ui;
     QVector<QImage> images;
@@ -105,4 +110,13 @@ private:
     QVector<double> SanduliakS3MAX;
     QVector<double> SanduliakS3MIN;
 
+
+    QVector<double> SanduliakS1Center;
+    QVector<double> SanduliakS2Center;
+    QVector<double> SanduliakS3Center;
+
+
+    double d1;
+    double d2;
+    double d3;
 };
