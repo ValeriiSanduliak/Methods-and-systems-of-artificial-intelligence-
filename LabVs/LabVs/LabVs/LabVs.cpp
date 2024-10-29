@@ -512,7 +512,7 @@ void LabVs::SegmentImage(QVector<QImage>& imagesLocal, QMap<int, QVector<int>>& 
         imageCropWidget->setImage(imagesLocal[i]);
         // Можливо, потрібно оновити UI для відображення зображень одразу
        // QApplication::processEvents();
-       // QThread::sleep(0.5); // Пауза між відображенням зображень (1 секунда)
+        QThread::sleep(0.5); // Пауза між відображенням зображень (1 секунда)
         imageCropWidget->setSectors(numberOfSectors);
         imageCropWidget->update();
     }
