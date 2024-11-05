@@ -138,9 +138,9 @@ void LabVs::on_buttonShowData_clicked()
 {
     // Очищуємо текстове поле перед виведенням нових даних
 
-    if (imageSegmentationDataClass1.isEmpty() || imageSegmentationDataClass2.isEmpty() || imageSegmentationDataClass3.isEmpty()){
+   /* if (imageSegmentationDataClass1.isEmpty() || imageSegmentationDataClass2.isEmpty() || imageSegmentationDataClass3.isEmpty()){
 		return;
-	}
+	}*/
 
     ui.plainTextEdit->clear();
     // Проходимо всі зображення та їхні сегментаційні дані
@@ -343,7 +343,7 @@ void LabVs::on_buttonCompare_clicked()
 
 void LabVs::on_buttonCompareD_clicked()
 {
-    d1 = calculateEuclideanDistance(CompareSanduliakS1[0], SanduliakS1Center);
+  /*  d1 = calculateEuclideanDistance(CompareSanduliakS1[0], SanduliakS1Center);
     d2 = calculateEuclideanDistance(CompareSanduliakS1[0], SanduliakS2Center);
     d3 = calculateEuclideanDistance(CompareSanduliakS1[0], SanduliakS3Center);
 
@@ -362,7 +362,9 @@ void LabVs::on_buttonCompareD_clicked()
 	}
 	else {
 		qDebug() << "The image does not belong to any class";
-	}
+	}*/
+
+	parceptt();
 }
 
 
@@ -660,6 +662,52 @@ QVector<double> LabVs::calculateColumnMeans(const QMap<int, QVector<double>>& da
     }
 
     return means;
+}
+
+#include <QVector>
+#include <QMap>
+#include <iostream>
+#include <numeric>
+#include <random>
+#include <vector>
+
+void LabVs::parceptt()
+{
+    QVector<QVector<double>> trainingData;
+    QVector<double> trainingLabels;
+
+    // Збираємо тренувальні дані
+    for (auto it = Class1SanduliakS1.begin(); it != Class1SanduliakS1.end(); ++it) {
+        QVector<double> data = it.value();
+        data.push_back(0); // мітка класу 1
+        trainingData.append(data);
+        trainingLabels.push_back(0);
+    }
+    for (auto it = Class2SanduliakS2.begin(); it != Class2SanduliakS2.end(); ++it) {
+        QVector<double> data = it.value();
+        data.push_back(1); // мітка класу 0
+        trainingData.append(data);
+        trainingLabels.push_back(1);
+    }
+
+    // Ініціалізуємо ваги
+    QVector<double> weights(trainingData[0].size(), 0);
+    randomize_weights(weights); // Випадкова ініціалізація ваг
+
+    // Тренування
+    training_function(trainingData, weights);
+
+    // Тестування
+    for (auto it = CompareSanduliakS1.begin(); it != CompareSanduliakS1.end(); ++it) {
+        QVector<double> testData = it.value();
+        testData.push_back(0); // Додаємо для сумісності з вагою
+        int result = classify(testData, weights);
+        std::cout << "Test input: ";
+        for (const auto& val : testData) {
+            std::cout << val << " "; // Виводимо кожен елемент вектора
+        }
+        std::cout << " classified as: " << result << "\n";
+    }
 }
 
 

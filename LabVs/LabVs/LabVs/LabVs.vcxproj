@@ -100,6 +100,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Perceptron.cpp" />
     <QtRcc Include="LabVs.qrc" />
     <QtUic Include="LabVs.ui" />
     <QtMoc Include="LabVs.h" />
@@ -109,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="imageCropWidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Perceptron.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

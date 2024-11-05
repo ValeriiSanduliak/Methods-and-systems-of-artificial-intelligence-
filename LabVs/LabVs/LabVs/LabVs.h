@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_LabVs.h"
 #include"imageCropWidget.h"
+#include "Perceptron.h"
 class LabVs : public QMainWindow
 {
     Q_OBJECT
@@ -59,6 +60,9 @@ protected:
 
     double calculateEuclideanDistance(const QVector<double>& vec1, const QVector<double>& vec2);
     QVector<double> calculateColumnMeans(const QMap<int, QVector<double>>& data);
+
+
+    void parceptt();
 
 private:
     Ui::LabVsClass ui;
